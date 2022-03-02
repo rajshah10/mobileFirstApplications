@@ -1,0 +1,17 @@
+@font-face{
+    font-family: 'Roblox';
+    src:url("../assets/fonts/Roblox\ Black\ Round.ttf")
+  }
+.cards{
+    margin: "80px 25px" ;
+    display:"grid";
+    width:"100%"; 
+    grid-template-columns:repeat(auto-fit,minmax(12px, 1fr));
+    grid-gap:8px;
+    
+  }
+  .joke-text{
+    font-family: 'MemphisRiver';
+    color:black;
+    
+  }
