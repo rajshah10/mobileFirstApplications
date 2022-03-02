@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import "../Css/login.css"
 const Login = () => {
-    const initialValues = { username: "", password: "" };
+    const [check,setCheck]=useState(false)
+    const initialValues = { username: "", password: ""};
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [error,setError]=useState("")
+  
     const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
+        
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +24,10 @@ const Login = () => {
         setIsSubmit(true);
         localStorage.setItem("data", JSON.stringify(formValues))
     };
-
+    const handleCheck=(e)=>{
+        setCheck(e.target.checked)
+    }
+    console.log(check)
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             console.log(formValues);
@@ -45,6 +53,12 @@ const Login = () => {
         else if (!letters.test(values.password)) {
             errors.password = "Password should contain alphabets only";
         }
+        else if(check==false)
+        {
+            const error="Please check the box"
+            setError(error)
+        }
+
         else {
             navigate("/dashboard")
         }
@@ -80,6 +94,8 @@ const Login = () => {
                         />
                     </div>
                     <p>{formErrors.password}</p>
+                    <input onChange={handleCheck} style={{float:"left",margin:10}} type="checkbox"/>
+                    <p>{error}</p>
                     <button className="fluid ui button blue">Submit</button>
                 </div>
             </form>
